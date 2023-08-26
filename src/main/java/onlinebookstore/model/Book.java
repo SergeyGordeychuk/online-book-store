@@ -9,9 +9,11 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
+@RequiredArgsConstructor
 @Table(name = "books")
 public class Book {
     @Id
@@ -29,6 +31,4 @@ public class Book {
     private String description;
     private String coverImage;
 
-    public Book() {
-    }
 }
