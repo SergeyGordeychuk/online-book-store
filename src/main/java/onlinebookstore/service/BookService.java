@@ -1,10 +1,8 @@
 package onlinebookstore.service;
 
 import java.util.List;
-
 import onlinebookstore.dto.BookDto;
 import onlinebookstore.dto.CreateBookRequestDto;
-import onlinebookstore.model.Book;
 
 public interface BookService {
 

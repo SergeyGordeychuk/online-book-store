@@ -3,10 +3,8 @@ package onlinebookstore.repository.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-
 import java.util.List;
 import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.model.Book;
 import onlinebookstore.repository.BookRepository;
@@ -46,8 +44,8 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> findAllByTitle(String title) {
         String lowerCaseTitle = title.toLowerCase();
         try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
-            return entityManager.createQuery("SELECT e FROM Book e " +
-                            "WHERE lower(e.title) LIKE:title", Book.class)
+            return entityManager.createQuery("SELECT e FROM Book e "
+                            + "WHERE lower(e.title) LIKE:title", Book.class)
                     .setParameter("title", "%" + lowerCaseTitle + "%")
                     .getResultList();
         }
