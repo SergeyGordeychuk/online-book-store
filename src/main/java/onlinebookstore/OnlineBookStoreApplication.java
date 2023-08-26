@@ -17,15 +17,4 @@ public class OnlineBookStoreApplication {
         SpringApplication.run(OnlineBookStoreApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner() {
-        return args -> {
-            Book book = new Book();
-            book.setTitle("Outsider");
-            book.setAuthor("Alber Kamyu");
-
-            bookService.save(book);
-            System.out.println(bookService.findAll());
-        };
-    }
 }
