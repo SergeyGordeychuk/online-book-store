@@ -1,6 +1,7 @@
 package onlinebookstore.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.dto.BookDto;
 import onlinebookstore.dto.CreateBookRequestDto;
@@ -31,10 +32,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getAllByTitle(String title) {
-        return bookRepository.findAllByTitleContainingIgnoreCase(title).stream()
-                .map(bookMapper::toDto)
-                .toList();
+    public BookDto update(Long id, CreateBookRequestDto requestDto) {
+        Book book = bookMapper.toModel(requestDto);
+        book.setId(id);
+        if (bookRepository.existsById(book.getId())) {
+            bookRepository.save(book);
+        } else {
+            throw new NoSuchElementException("Can't update book: " + book);
+        }
+        return bookMapper.toDto(book);
     }
 
     @Override
@@ -42,5 +48,10 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll().stream()
                 .map(bookMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        bookRepository.deleteById(id);
     }
 }
