@@ -76,6 +76,10 @@
 			<artifactId>mapstruct</artifactId>
 			<version>${mapstruct.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -126,7 +130,6 @@
 					<sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
 					</sourceDirectories>
 					<configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
-					<encoding>UTF-8</encoding>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
 					<linkXRef>false</linkXRef>
