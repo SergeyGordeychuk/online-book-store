@@ -4,6 +4,7 @@ import java.util.List;
 import onlinebookstore.dto.BookDto;
 import onlinebookstore.dto.BookSearchParameters;
 import onlinebookstore.dto.CreateBookRequestDto;
+import org.springframework.data.domain.Pageable;
 
 public interface BookService {
 
@@ -13,7 +14,7 @@ public interface BookService {
 
     BookDto update(Long id, CreateBookRequestDto requestDto);
 
-    List<BookDto> findAll();
+    List<BookDto> findAll(Pageable pageable);
 
     void deleteById(Long id);
 
