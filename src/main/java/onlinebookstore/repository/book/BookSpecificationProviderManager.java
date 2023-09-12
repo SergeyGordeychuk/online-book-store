@@ -1,4 +1,4 @@
-package onlinebookstore.repository;
+package onlinebookstore.repository.book;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
