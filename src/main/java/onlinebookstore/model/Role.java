@@ -2,11 +2,9 @@ package onlinebookstore.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
-@RequiredArgsConstructor
 @Table(name = "roles")
 public class Role {
     @Id

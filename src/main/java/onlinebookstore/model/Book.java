@@ -1,7 +1,10 @@
 package onlinebookstore.model;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
+import java.util.Set;
+
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -15,15 +18,22 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String author;
+    @Column(unique = true,nullable = false)
     private String isbn;
+    @Column(nullable = false)
     private BigDecimal price;
     private String description;
     private String coverImage;
-    @Column(nullable = false)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "book_category",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
+    @Column(nullable = false,name = "is_deleted")
     private boolean isDeleted = false;
 
-    public Book() {
-    }
 }

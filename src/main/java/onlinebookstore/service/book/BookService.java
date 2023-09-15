@@ -1,7 +1,9 @@
 package onlinebookstore.service.book;
 
 import java.util.List;
+
 import onlinebookstore.dto.book.BookDto;
+import onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import onlinebookstore.dto.book.BookSearchParameters;
 import onlinebookstore.dto.book.CreateBookRequestDto;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +21,6 @@ public interface BookService {
     void deleteById(Long id);
 
     List<BookDto> search(BookSearchParameters params);
+
+    List<BookDtoWithoutCategoryIds> findAllByCategoryId(Long categoryId);
 }

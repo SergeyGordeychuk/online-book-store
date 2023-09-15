@@ -1,6 +1,8 @@
 package onlinebookstore.controller;
 
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.dto.user.UserResponseDto;
 import onlinebookstore.service.user.UserService;
@@ -19,6 +21,7 @@ public class UserController {
     private final UserService userService;
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
+    @Operation(description = "Gets all users")
     List<UserResponseDto> findAll(Authentication authentication, Pageable pageable) {
         return userService.findAll(pageable);
     }

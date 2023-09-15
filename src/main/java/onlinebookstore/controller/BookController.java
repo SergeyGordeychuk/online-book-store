@@ -1,10 +1,12 @@
 package onlinebookstore.controller;
 
+import java.util.List;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.dto.book.BookDto;
+import onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import onlinebookstore.dto.book.BookSearchParameters;
 import onlinebookstore.dto.book.CreateBookRequestDto;
 import onlinebookstore.service.book.BookService;
@@ -12,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "Book management", description = "Endpoint for managing books")
 @RequiredArgsConstructor
@@ -41,7 +41,7 @@ public class BookController {
     @PutMapping("/{id}")
     @Operation(description = "Update book by 'id'")
     public BookDto update(@PathVariable Long id,
-                          @RequestBody @Valid CreateBookRequestDto requestDto) {
+                                            @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.update(id, requestDto);
     }
 
