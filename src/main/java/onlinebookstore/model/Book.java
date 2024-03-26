@@ -24,9 +24,9 @@ public class Book {
     private String title;
     @Column(name = "authors",nullable = false)
     private String author;
-    @Column(unique = true,nullable = false)
+    @Column(name = "isbn",unique = true,nullable = false)
     private String isbn;
-    @Column(nullable = false)
+    @Column(name = "price",nullable = false)
     private BigDecimal price;
     private String description;
     private String coverImage;
