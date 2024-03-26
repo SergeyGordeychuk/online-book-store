@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.dto.BookDto;
+import onlinebookstore.dto.BookSearchParameters;
 import onlinebookstore.dto.CreateBookRequestDto;
 import onlinebookstore.service.BookService;
 import org.springframework.data.domain.Pageable;
@@ -61,4 +62,11 @@ public class BookController {
         bookService.deleteById(id);
     }
 
+    @GetMapping("/search")
+    @Operation(description = "Gets all books with "
+            + " sort by price or by title "
+            + " or by author in ASC or DESC order")
+    public List<BookDto> search(BookSearchParameters params) {
+        return bookService.search(params);
+    }
 }
