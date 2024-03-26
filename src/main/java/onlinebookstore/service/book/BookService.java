@@ -1,7 +1,6 @@
 package onlinebookstore.service.book;
 
 import java.util.List;
-
 import onlinebookstore.dto.book.BookDto;
 import onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import onlinebookstore.dto.book.BookSearchParameters;
