@@ -1,4 +1,4 @@
-package onlinebookstore.dto.book;
+package onlinebookstore.dto;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
