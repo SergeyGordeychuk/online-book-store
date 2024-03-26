@@ -20,9 +20,9 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(name = "titles",nullable = false)
     private String title;
-    @Column(nullable = false)
+    @Column(name = "authors",nullable = false)
     private String author;
     @Column(unique = true,nullable = false)
     private String isbn;

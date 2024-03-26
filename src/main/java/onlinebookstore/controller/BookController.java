@@ -1,11 +1,11 @@
 package onlinebookstore.controller;
 
-import jakarta.validation.Valid;
-import java.util.List;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.dto.BookDto;
+import onlinebookstore.dto.BookSearchParameters;
 import onlinebookstore.dto.CreateBookRequestDto;
 import onlinebookstore.service.BookService;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Tag(name = "Book management", description = "Endpoint for managing books")
 @RequiredArgsConstructor
@@ -43,7 +45,7 @@ public class BookController {
     @PutMapping("/{id}")
     @Operation(description = "Update book by 'id'")
     public BookDto update(@PathVariable Long id,
-                                            @RequestBody @Valid CreateBookRequestDto requestDto) {
+                          @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.update(id, requestDto);
     }
 
@@ -59,5 +61,13 @@ public class BookController {
     @Operation(description = "Delete book by 'id'")
     public void delete(@PathVariable Long id) {
         bookService.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    @Operation(description = "Gets all books with "
+            + " sort by price or by title "
+            + " or by author in ASC or DESC order")
+    public List<BookDto> search(BookSearchParameters params) {
+        return bookService.search(params);
     }
 }

@@ -3,8 +3,9 @@ package onlinebookstore.dto;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import lombok.Data;
+
+import java.math.BigDecimal;
 
 @Data
 public class CreateBookRequestDto {
@@ -21,5 +22,4 @@ public class CreateBookRequestDto {
     private BigDecimal price;
     private String description;
     private String coverImage;
-
 }
