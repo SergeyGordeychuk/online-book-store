@@ -1,9 +1,9 @@
-package onlinebookstore.service;
+package onlinebookstore.service.book;
 
 import java.util.List;
-import onlinebookstore.dto.BookDto;
-import onlinebookstore.dto.BookSearchParameters;
-import onlinebookstore.dto.CreateBookRequestDto;
+import onlinebookstore.dto.book.BookDto;
+import onlinebookstore.dto.book.BookSearchParameters;
+import onlinebookstore.dto.book.CreateBookRequestDto;
 import org.springframework.data.domain.Pageable;
 
 public interface BookService {
