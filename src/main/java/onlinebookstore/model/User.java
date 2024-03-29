@@ -14,19 +14,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Data
 @Entity
+@Getter
+@Setter
 @SQLDelete(sql = "UPDATE users SET is_deleted=TRUE WHERE id=?")
 @Where(clause = "is_deleted=false")
-@RequiredArgsConstructor
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -63,7 +63,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getEmail();
+        return email;
     }
 
     @Override
