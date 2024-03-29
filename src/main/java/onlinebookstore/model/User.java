@@ -56,7 +56,6 @@ public class User implements UserDetails {
         List<SimpleGrantedAuthority> rolesList = new ArrayList<>();
         for (Role role : roles) {
             String string = role.getName().toString();
-            System.out.println(string);
             rolesList.add(new SimpleGrantedAuthority(string));
         }
         return rolesList;
