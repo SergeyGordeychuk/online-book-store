@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-roles-table
+      author: sergey
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: ENUM('ROLE_ADMIN', 'ROLE_USER')
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: is_deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
