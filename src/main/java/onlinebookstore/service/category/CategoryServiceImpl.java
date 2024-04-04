@@ -41,13 +41,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto update(Long id, CategoryRequestDto requestDto) {
+        if (!categoryRepository.existsById(id)) {
+            throw new NoSuchElementException("Can't find category by id: " + id );
+        }
         Category category = categoryMapper.toEntity(requestDto);
         category.setId(id);
-        if (categoryRepository.existsById(id)) {
-            categoryRepository.save(category);
-        } else {
-            throw new NoSuchElementException("Can't update category: " + category);
-        }
+        categoryRepository.save(category);
         return categoryMapper.toDto(category);
     }
 

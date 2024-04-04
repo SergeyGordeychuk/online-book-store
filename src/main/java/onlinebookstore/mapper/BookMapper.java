@@ -1,7 +1,7 @@
 package onlinebookstore.mapper;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import onlinebookstore.config.MapperConfig;
 import onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import onlinebookstore.dto.book.BookDto;
@@ -26,10 +26,10 @@ public interface BookMapper {
     }
 
     default Set<Long> mapToIds(Set<Category> categories) {
-        Set<Long> categoryIds = new HashSet<>();
-        for (Category category : categories) {
-            categoryIds.add(category.getId());
-        }
+        Set<Long> categoryIds;
+        categoryIds = categories.stream()
+                .map(Category::getId)
+                .collect(Collectors.toSet());
         return categoryIds;
     }
 }
