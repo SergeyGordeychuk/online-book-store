@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.dto.book.BookDto;
+import onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import onlinebookstore.dto.book.BookSearchParameters;
 import onlinebookstore.dto.book.CreateBookRequestDto;
 import onlinebookstore.exception.EntityNotFoundException;
@@ -23,9 +24,9 @@ public class BookServiceImpl implements BookService {
     private final BookSpecificationBuilder bookSpecificationBuilder;
 
     @Override
-    public BookDto save(CreateBookRequestDto requestDto) {
-        Book bookMapperModel = bookMapper.toModel(requestDto);
-        return bookMapper.toDto(bookRepository.save(bookMapperModel));
+    public BookDtoWithoutCategoryIds save(CreateBookRequestDto requestDto) {
+        Book bookMapperModel = bookMapper.toEntity(requestDto);
+        return bookMapper.toDtoWithoutCategories(bookRepository.save(bookMapperModel));
     }
 
     @Override
@@ -37,7 +38,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto update(Long id, CreateBookRequestDto requestDto) {
-        Book book = bookMapper.toModel(requestDto);
+        Book book = bookMapper.toEntity(requestDto);
         book.setId(id);
         if (bookRepository.existsById(book.getId())) {
             bookRepository.save(book);
@@ -66,6 +67,14 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll(bookSpecification)
                 .stream()
                 .map(bookMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<BookDtoWithoutCategoryIds> findAllByCategoryId(Long id) {
+        return bookRepository.findAllByCategoryId(id)
+                .stream()
+                .map(bookMapper::toDtoWithoutCategories)
                 .toList();
     }
 }

@@ -15,3 +15,13 @@ databaseChangeLog:
       file: db/changelog/changes/07-set-bcrypt-password.yaml
   - include:
       file: db/changelog/changes/08-add-role-to-users.yaml
+  - include:
+      file: db/changelog/changes/09-create-categories-table.yaml
+  - include:
+      file: db/changelog/changes/10-insert-category-to-categories.yaml
+  - include:
+      file: db/changelog/changes/11-create-books-categories-table.yaml
+  - include:
+      file: db/changelog/changes/12-insert-books-to-books.yaml
+  - include:
+      file: db/changelog/changes/13-add-category-to-books.yaml

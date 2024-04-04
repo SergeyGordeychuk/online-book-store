@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-categories
+      author: sergey
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column: {name: name, value: "Romance"}
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: name, value: "Novel" }
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: name, value: "Fantasy" }
