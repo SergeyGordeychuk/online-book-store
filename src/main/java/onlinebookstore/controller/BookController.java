@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import onlinebookstore.dto.book.BookDto;
+import onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import onlinebookstore.dto.book.BookSearchParameters;
 import onlinebookstore.dto.book.CreateBookRequestDto;
 import onlinebookstore.service.book.BookService;
@@ -57,7 +58,7 @@ public class BookController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(description = "Create a new book")
-    public BookDto save(@RequestBody @Valid CreateBookRequestDto requestDto) {
+    public BookDtoWithoutCategoryIds save(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.save(requestDto);
     }
 

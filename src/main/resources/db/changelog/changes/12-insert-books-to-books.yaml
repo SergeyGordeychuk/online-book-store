@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-books
+      author: sergey
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column: {name: titles, value: "Arch of Triumph"}
+              - column: {name: authors, value: "Erich Maria Remarque"}
+              - column: {name: isbn, value: "1"}
+              - column: {name: price, value: 299}
+        - insert:
+            tableName: books
+            columns:
+              - column: { name: titles, value: "Brave New World" }
+              - column: { name: authors, value: "Aldous Huxley" }
+              - column: { name: isbn, value: "2" }
+              - column: { name: price, value: 199 }
+        - insert:
+            tableName: books
+            columns:
+              - column: { name: titles, value: "The Count of Monte Cristo" }
+              - column: { name: authors, value: "Alexander Dumas" }
+              - column: { name: isbn, value: "3" }
+              - column: { name: price, value: 399 }
