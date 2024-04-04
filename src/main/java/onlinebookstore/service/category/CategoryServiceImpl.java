@@ -11,6 +11,7 @@ import onlinebookstore.model.Category;
 import onlinebookstore.repository.category.CategoryRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -20,8 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> findAll(Pageable pageable) {
-        return categoryRepository.findAll(pageable)
-                .stream()
+        return categoryRepository.findAll(pageable).stream()
                 .map(categoryMapper::toDto)
                 .toList();
     }
@@ -40,9 +40,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryDto update(Long id, CategoryRequestDto requestDto) {
         if (!categoryRepository.existsById(id)) {
-            throw new NoSuchElementException("Can't find category by id: " + id );
+            throw new NoSuchElementException("Can't find category by id: " + id);
         }
         Category category = categoryMapper.toEntity(requestDto);
         category.setId(id);

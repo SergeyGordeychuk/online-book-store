@@ -22,11 +22,9 @@ databaseChangeLog:
             constraintName: fk_books_categories_book_id
             referencedTableName: books
             referencedColumnNames: id
-            onDelete: CASCADE
         - addForeignKeyConstraint:
             baseTableName: books_categories
             baseColumnNames: category_id
             constraintName: fk_books_categories_category_id
             referencedTableName: categories
             referencedColumnNames: id
-            onDelete: CASCADE
