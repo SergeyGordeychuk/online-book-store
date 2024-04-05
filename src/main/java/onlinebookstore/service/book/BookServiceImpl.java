@@ -15,6 +15,7 @@ import onlinebookstore.repository.book.BookSpecificationBuilder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -36,15 +37,15 @@ public class BookServiceImpl implements BookService {
         return bookMapper.toDto(book);
     }
 
+    @Transactional
     @Override
     public BookDto update(Long id, CreateBookRequestDto requestDto) {
+        if (!bookRepository.existsById(id)) {
+            throw new NoSuchElementException("Can't update book by: " + id);
+        }
         Book book = bookMapper.toEntity(requestDto);
         book.setId(id);
-        if (bookRepository.existsById(book.getId())) {
-            bookRepository.save(book);
-        } else {
-            throw new NoSuchElementException("Can't update book: " + book);
-        }
+        bookRepository.save(book);
         return bookMapper.toDto(book);
     }
 
