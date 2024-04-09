@@ -31,7 +31,7 @@ public class CartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(description = "Gets all books with shopping cart")
     public ShoppingCartResponseDto getShoppingCart(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = getUser(authentication);
         return shoppingCartService.getShoppingCart(user);
     }
 
@@ -40,7 +40,7 @@ public class CartController {
     @Operation(description = "Save book to shopping cart")
     public ShoppingCartResponseDto saveCartItemToShoppingCart(
             @RequestBody @Valid CartItemRequestDto requestDto, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = getUser(authentication);
         return shoppingCartService.saveCartItemToShoppingCart(requestDto, user);
     }
 
@@ -50,7 +50,7 @@ public class CartController {
     public ShoppingCartResponseDto update(@PathVariable Long id,
                                           @RequestBody QuantityRequestDto requestDto,
                                           Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = getUser(authentication);
         return shoppingCartService.update(id, requestDto, user);
     }
 
@@ -58,7 +58,11 @@ public class CartController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(description = "Delete cartItem by cartItemId")
     public void delete(@PathVariable Long id, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = getUser(authentication);
         shoppingCartService.delete(id, user);
+    }
+
+    private User getUser(Authentication authentication) {
+        return (User) authentication.getPrincipal();
     }
 }

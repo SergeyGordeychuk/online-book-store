@@ -16,7 +16,6 @@ public interface ShoppingCartMapper {
     @Mapping(target = "userId", source = "user.id")
     @Mapping(target = "cartItems", source = "cartItems")
     ShoppingCartResponseDto toDto(ShoppingCart shoppingCart);
-
     @AfterMapping
     default Set<CartItemResponseDto> mapCartItemsDto(Set<CartItem> cartItems) {
         if (cartItems == null) {

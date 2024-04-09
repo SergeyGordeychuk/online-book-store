@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "cart_items ")
+@Table(name = "cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,6 @@ public class CartItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
-    @NonNull
+    @Positive
     private int quantity;
 }

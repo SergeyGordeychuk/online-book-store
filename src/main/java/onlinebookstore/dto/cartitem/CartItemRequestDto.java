@@ -1,11 +1,11 @@
 package onlinebookstore.dto.cartitem;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
 public class CartItemRequestDto {
     private Long bookId;
-    @Min(1)
+    @Positive
     private int quantity;
 }
