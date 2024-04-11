@@ -1,5 +1,6 @@
 package onlinebookstore.mapper;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import onlinebookstore.config.MapperConfig;
@@ -12,6 +13,7 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 
 @Mapper(config = MapperConfig.class)
 public interface BookMapper {
@@ -33,5 +35,12 @@ public interface BookMapper {
                 .map(Category::getId)
                 .collect(Collectors.toSet());
         return categoryIds;
+    }
+
+    @Named("bookFromId")
+    default Book bookFromId(Long id) {
+        return Optional.ofNullable(id)
+                .map(Book::new)
+                .orElse(null);
     }
 }

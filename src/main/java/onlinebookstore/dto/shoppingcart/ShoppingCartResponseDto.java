@@ -8,5 +8,5 @@ import onlinebookstore.dto.cartitem.CartItemResponseDto;
 public class ShoppingCartResponseDto {
     private Long id;
     private Long userId;
-    private Set<CartItemResponseDto> cartItems;
+    private Set<CartItemResponseDto> cartItemsDto;
 }
