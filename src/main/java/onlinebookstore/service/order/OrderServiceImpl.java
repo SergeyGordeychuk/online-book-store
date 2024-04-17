@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class OrderServiceImpl implements OrderService {
-    private final LocalDateTime DATE_TIME = LocalDateTime.now();
 
     private final OrderRepository orderRepository;
     private final ShoppingCartRepository shoppingCartRepository;
@@ -49,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(user);
         order.setStatus(Order.Status.PENDING);
         order.setShippingAddress(requestDto.shippingAddress());
-        order.setOrderDate(DATE_TIME);
+        order.setOrderDate(LocalDateTime.now());
         order.setTotal(total);
         order = orderRepository.save(order);
         addOrderItems(order, orderItems);
