@@ -18,4 +18,6 @@ public interface OrderService {
     OrderItemDto getOrderItemByOrderIdAndItemId(Long orderId, Long itemId, User user);
 
     void updateStatus(Long orderId, OrderStatusRequestDto requestDto);
+
+    void delete(Long orderId);
 }

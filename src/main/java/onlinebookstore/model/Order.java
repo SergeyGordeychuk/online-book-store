@@ -21,14 +21,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE orders SET is_deleted=TRUE WHERE id=?")
-@Where(clause = "is_deleted=false")
+@SQLRestriction("is_deleted=false")
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -40,12 +40,12 @@ public class Order {
     private User user;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, columnDefinition = "varchar")
-    private Status status;
+    private Status status = Status.PENDING;
     @Column(nullable = false)
     private BigDecimal total;
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime orderDate;
+    private LocalDateTime orderDate = LocalDateTime.now();
     @Column(nullable = false)
     private String shippingAddress;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -14,6 +14,7 @@ import onlinebookstore.service.order.OrderService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +41,7 @@ public class OrderController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     @Operation(description = "Get all orders with "
-            + "pagination and ability to sort ")
+            + "pagination and ability to sort.")
     public List<OrderDto> getAllOrders(Pageable pageable, Authentication authentication) {
         User user = getUser(authentication);
         return orderService.getAllOrders(user, pageable);
@@ -49,7 +50,7 @@ public class OrderController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{orderId}/items")
     @Operation(description = "Get all orderItems by order with "
-            + "pagination and ability to sort ")
+            + "pagination and ability to sort.")
     public List<OrderItemDto> getAllOrderItemsByOrderId(@PathVariable Long orderId,
                                                         Authentication authentication,
                                                         Pageable pageable) {
@@ -59,7 +60,7 @@ public class OrderController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{orderId}/items/{itemId}")
-    @Operation(description = "Get orderItem by 'orderId' and 'itemId'")
+    @Operation(description = "Get orderItem by 'orderId' and 'itemId'.")
     OrderItemDto getOrderItemByIdByOrderId(@PathVariable Long orderId,
                                            @PathVariable Long itemId,
                                            Authentication authentication
@@ -70,10 +71,17 @@ public class OrderController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping("/{orderId}")
-    @Operation(description = "Patch order status by order id")
+    @Operation(description = "Patch order status by order id.")
     public void updateStatus(@PathVariable Long orderId,
                              @RequestBody @Valid OrderStatusRequestDto requestDto) {
         orderService.updateStatus(orderId, requestDto);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/{orderId}")
+    @Operation(description = "Delete order by order id.")
+    public void delete(@PathVariable Long orderId) {
+        orderService.delete(orderId);
     }
 
     private User getUser(Authentication authentication) {
