@@ -16,13 +16,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Getter
 @Setter
 @SQLDelete(sql = "UPDATE books SET is_deleted = TRUE WHERE id = ?")
-@Where(clause = "is_deleted=false")
+@SQLRestriction("is_deleted=false")
 @Table(name = "books")
 @NoArgsConstructor
 public class Book {
