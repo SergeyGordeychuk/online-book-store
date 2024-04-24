@@ -40,7 +40,7 @@ services:
          "server.servlet.context-path": "/api",
          "spring.liquibase.enabled": "true",
 
-         "jwt.expiration": "300000000",
-         "jwt.secret": "hellomates23r43r8938fywefwefwefwsegty2hofhlwfiulai"
+         "jwt.expiration": "${JWT_EXPIRATION}",
+         "jwt.secret": "${JWT_SECRET}"
 }'
       JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
