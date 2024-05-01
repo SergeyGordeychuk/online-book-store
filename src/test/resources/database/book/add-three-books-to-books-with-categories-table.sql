@@ -1,0 +1,10 @@
+insert into books (id, titles, authors, isbn, price) values (1,'AAA','aaa','1',100);
+insert into books (id, titles, authors, isbn, price) values (2,'BBB','bbb','11',200);
+insert into books (id, titles, authors, isbn, price) values (3,'CCC','ccc','111',300);
+insert into categories (id,name) values (1,'Romance');
+insert into categories (id, name) values (2, 'Novel');
+insert into categories (id, name) values (3, 'Fantasy');
+insert into books_categories (book_id, category_id) VALUES (1,2);
+insert into books_categories (book_id, category_id) VALUES (2,3);
+insert into books_categories (book_id, category_id) VALUES (3,1);
+insert into books_categories (book_id, category_id) VALUES (1,3);
