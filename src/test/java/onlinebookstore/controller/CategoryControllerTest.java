@@ -33,6 +33,10 @@ import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CategoryControllerTest {
+    private static final String ADD_BOOKS_WITH_CATEGORIES_SQL =
+            "database/book/add-three-books-to-books-with-categories-table.sql";
+    private static final String REMOVE_BOOKS_WITH_CATEGORIES_SQL =
+            "database/book/remove-all-from-books-with-categories-table.sql";
     protected static MockMvc mockMvc;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -49,7 +53,7 @@ class CategoryControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/book/add-three-books-to-books-with-categories-table.sql"));
+                    new ClassPathResource(ADD_BOOKS_WITH_CATEGORIES_SQL));
         }
     }
 
@@ -66,7 +70,7 @@ class CategoryControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/book/remove-all-from-books-with-categories-table.sql")
+                    new ClassPathResource(REMOVE_BOOKS_WITH_CATEGORIES_SQL)
             );
         }
     }
@@ -89,8 +93,8 @@ class CategoryControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     @Sql(scripts = {
-            "classpath:database/book/remove-all-from-books-with-categories-table.sql",
-            "classpath:database/book/add-three-books-to-books-with-categories-table.sql"
+            REMOVE_BOOKS_WITH_CATEGORIES_SQL,
+            ADD_BOOKS_WITH_CATEGORIES_SQL
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void save_Category_Success() throws Exception {
         CategoryRequestDto requestDto = new CategoryRequestDto();
@@ -138,8 +142,8 @@ class CategoryControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     @Sql(scripts = {
-            "classpath:database/book/remove-all-from-books-with-categories-table.sql",
-            "classpath:database/book/add-three-books-to-books-with-categories-table.sql"
+            REMOVE_BOOKS_WITH_CATEGORIES_SQL,
+            ADD_BOOKS_WITH_CATEGORIES_SQL
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void update_Category_Success() throws Exception {
         Long id = 1L;

@@ -16,7 +16,6 @@ class BookRepositoryTest {
     @Autowired
     private BookRepository bookRepository;
 
-
     @Test
     @DisplayName("""
             Find all books by categoryId

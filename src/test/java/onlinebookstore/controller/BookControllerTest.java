@@ -35,8 +35,13 @@ import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class BookControllerTest {
+    private static final String ADD_BOOKS_WITH_CATEGORIES_SQL =
+            "database/book/add-three-books-to-books-with-categories-table.sql";
+    private static final String REMOVE_BOOKS_WITH_CATEGORIES_SQL =
+            "database/book/remove-all-from-books-with-categories-table.sql";
+    private static final String DELETE_BOOK_WHERE_TITLE_QQQ_SQL =
+            "classpath:database/book/delete-book-where-title-qqq.sql";
     protected static MockMvc mockMvc;
-
     private final ObjectMapper mapper = new ObjectMapper();
 
     @BeforeAll
@@ -53,7 +58,7 @@ class BookControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/book/add-three-books-to-books-with-categories-table.sql"));
+                    new ClassPathResource(ADD_BOOKS_WITH_CATEGORIES_SQL));
         }
     }
 
@@ -70,7 +75,7 @@ class BookControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
-                    new ClassPathResource("database/book/remove-all-from-books-with-categories-table.sql")
+                    new ClassPathResource(REMOVE_BOOKS_WITH_CATEGORIES_SQL)
             );
         }
     }
@@ -116,8 +121,8 @@ class BookControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     @Sql(scripts = {
-            "classpath:database/book/remove-all-from-books-with-categories-table.sql",
-            "classpath:database/book/add-three-books-to-books-with-categories-table.sql"
+            REMOVE_BOOKS_WITH_CATEGORIES_SQL,
+            ADD_BOOKS_WITH_CATEGORIES_SQL
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void update_Book_Success() throws Exception {
         CreateBookRequestDto requestDto = new CreateBookRequestDto();
@@ -154,7 +159,7 @@ class BookControllerTest {
             Save Book
             """)
     @Sql(scripts = {
-            "classpath:database/book/delete-book-where-title-qqq.sql"
+            DELETE_BOOK_WHERE_TITLE_QQQ_SQL
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void save_Book_Success() throws Exception {
         CreateBookRequestDto requestDto = new CreateBookRequestDto();
