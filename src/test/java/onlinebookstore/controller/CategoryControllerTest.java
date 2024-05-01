@@ -37,6 +37,7 @@ class CategoryControllerTest {
             "database/book/add-three-books-to-books-with-categories-table.sql";
     private static final String REMOVE_BOOKS_WITH_CATEGORIES_SQL =
             "database/book/remove-all-from-books-with-categories-table.sql";
+    private static final String CLASS_PATH = "classpath:";
     protected static MockMvc mockMvc;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -93,8 +94,8 @@ class CategoryControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     @Sql(scripts = {
-            REMOVE_BOOKS_WITH_CATEGORIES_SQL,
-            ADD_BOOKS_WITH_CATEGORIES_SQL
+            CLASS_PATH + REMOVE_BOOKS_WITH_CATEGORIES_SQL,
+            CLASS_PATH + ADD_BOOKS_WITH_CATEGORIES_SQL
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void save_Category_Success() throws Exception {
         CategoryRequestDto requestDto = new CategoryRequestDto();
@@ -142,8 +143,8 @@ class CategoryControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     @Sql(scripts = {
-            REMOVE_BOOKS_WITH_CATEGORIES_SQL,
-            ADD_BOOKS_WITH_CATEGORIES_SQL
+            CLASS_PATH + REMOVE_BOOKS_WITH_CATEGORIES_SQL,
+            CLASS_PATH + ADD_BOOKS_WITH_CATEGORIES_SQL
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void update_Category_Success() throws Exception {
         Long id = 1L;

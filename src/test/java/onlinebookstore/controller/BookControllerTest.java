@@ -41,7 +41,9 @@ class BookControllerTest {
             "database/book/remove-all-from-books-with-categories-table.sql";
     private static final String DELETE_BOOK_WHERE_TITLE_QQQ_SQL =
             "classpath:database/book/delete-book-where-title-qqq.sql";
+    private static final String CLASS_PATH = "classpath:";
     protected static MockMvc mockMvc;
+
     private final ObjectMapper mapper = new ObjectMapper();
 
     @BeforeAll
@@ -121,8 +123,8 @@ class BookControllerTest {
     @WithMockUser(username = "admin", roles = "ADMIN")
     @Test
     @Sql(scripts = {
-            REMOVE_BOOKS_WITH_CATEGORIES_SQL,
-            ADD_BOOKS_WITH_CATEGORIES_SQL
+            CLASS_PATH + REMOVE_BOOKS_WITH_CATEGORIES_SQL,
+            CLASS_PATH + ADD_BOOKS_WITH_CATEGORIES_SQL
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void update_Book_Success() throws Exception {
         CreateBookRequestDto requestDto = new CreateBookRequestDto();
