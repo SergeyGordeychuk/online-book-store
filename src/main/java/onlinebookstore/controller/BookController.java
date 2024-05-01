@@ -75,7 +75,7 @@ public class BookController {
     @Operation(description = "Gets all books with "
             + " sort by title "
             + " or by author in ASC or DESC order")
-    public List<BookDto> search(BookSearchParameters params) {
-        return bookService.search(params);
+    public List<BookDto> search(BookSearchParameters params, Pageable pageable) {
+        return bookService.search(params, pageable);
     }
 }
