@@ -1,10 +1,11 @@
 package onlinebookstore.dto.category;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
-public record CategoryRequestDto(
+@Data
+public class CategoryRequestDto{
         @NotNull
-        String name,
-        String description
-) {
+        private String name;
+        private String description;
 }
