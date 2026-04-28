@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysqldb:
-    platform: linux/x86_64
+    platform: linux/amd64
     image: mysql
     restart: unless-stopped
     env_file: ./.env
@@ -17,7 +17,7 @@ services:
       timeout: 30s
       retries: 3
   app:
-    platform: linux/x86_64
+    platform: linux/amd64
     depends_on:
       - mysqldb
     restart: on-failure
